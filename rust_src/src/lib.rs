@@ -4,16 +4,12 @@ use std::ptr;
 use std::io::{self, Read, Write};
 use std::fs::{self, File, OpenOptions};
 
-fn main() {
-    println!("Hello, world!");
-}
-
 // join_binary
 // _join_binary( *const c_char, *const *const c_char)
 
 // output_pathにはファイル名まで含む。
 #[no_mangle]
-pub extern "C" fn join_bynary(input_paths: *const *const c_char, num_files: i32, output_path: *const c_char) -> i32 {
+pub extern "C" fn join_binary(input_paths: *const *const c_char, num_files: i32, output_path: *const c_char) -> i32 {
     unsafe {
         let output_path_cstr = CStr::from_ptr(output_path);
         let output_path_str = output_path_cstr.to_str().expect("Invalid output path");
